@@ -20,12 +20,9 @@ class HttpClient {
 
   constructor(options = {}) {
     if (options.proxy) {
-      let [host, port] = options.proxy.split(':')
-      let agentOptions = { host, port, secureProxy: true }
-
       this.baseRequestOptions.agent = {
-        http: new HttpProxyAgent(agentOptions),
-        https: new HttpsProxyAgent(agentOptions),
+        http: new HttpProxyAgent(options.proxy),
+        https: new HttpsProxyAgent(options.proxy),
       }
     }
   }
